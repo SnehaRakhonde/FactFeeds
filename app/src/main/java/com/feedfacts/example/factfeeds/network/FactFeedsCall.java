@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 /**
  * Web API interface.
  *
- * @author manishpatole
+ * @author Sneha Rakhonde
  */
 
 public interface FactFeedsCall {
