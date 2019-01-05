@@ -2,6 +2,7 @@ package com.feedfacts.example.factfeeds.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
     private RecyclerView mFactFeedList;
     private TextView tvNoFeedsAvailableMessage;
     private FactFeedAdapter mFactFeedAdapter;
+    private SwipeRefreshLayout swipeRefreshList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
         setContentView(com.feedfacts.example.factfeeds.R.layout.activity_main);
         initialiseUi();
         getFeeds();
+        setListners();
     }
 
     @Override
@@ -49,6 +52,7 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.fetching_fact_feeds));*/
 
+        swipeRefreshList = (SwipeRefreshLayout) findViewById(R.id.swipeToRefresh);
 
         mFactFeedAdapter = new FactFeedAdapter(null);
         mFactFeedList.setLayoutManager(new LinearLayoutManager(this));
@@ -62,6 +66,9 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
     private void getFeeds() {
         if (checkInternet()) {
             mPresenter.getFactFeeds();
+            setRefreshingState(true);
+        }else {
+            setRefreshingState(false);
         }
     }
     @Override
@@ -104,4 +111,29 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
         getSupportActionBar().setTitle(getString(R.string.error));
         dialog.dismiss();
     }
+    /**
+     * This method will check whether is page refreshing
+     *
+     * @param setRefreshing - true if page is refreshing
+     */
+    public void setRefreshingState(boolean setRefreshing) {
+        if (null ==  swipeRefreshList) {
+            return;
+        }
+        // Stop refresh animation
+        swipeRefreshList.setRefreshing(false);
+
+    }
+    /**
+     * Method to add listners
+     */
+    private void setListners() {
+        swipeRefreshList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getFeeds();
+            }
+        });
+    }
+
 }

@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:padding="3dp"
         android:textColor="@color/colorPrimary"
         android:text="Beavers"
         />
@@ -42,7 +43,7 @@
         <ImageView
             android:id="@+id/fact_image"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:src="@drawable/ic_launcher_background" />
     </LinearLayout>
