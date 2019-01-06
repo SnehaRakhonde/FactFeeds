@@ -6,5 +6,5 @@ package com.feedfacts.example.factfeeds.basemvp;
  * @author Sneha Rakhonde
  */
 public interface IPresenter {
-//Marker interface
+
 }

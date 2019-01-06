@@ -19,7 +19,6 @@ public abstract class BaseAppActivity <T extends IPresenter> extends AppCompatAc
         implements DialogUtil.OnDialogClick {
 
     protected T mPresenter;
-    //private static NetworkStateReceiver sNetworkStateReceiver = new NetworkStateReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

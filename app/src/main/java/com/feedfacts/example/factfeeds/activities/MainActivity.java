@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -48,10 +49,6 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
         mFactFeedList = (RecyclerView) findViewById(R.id.recycler_fact);
         tvNoFeedsAvailableMessage = (TextView) findViewById(R.id.txt_data_error);
 
-        /*final Toolbar toolbar = (Toolbar) findViewById(R.id.);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.fetching_fact_feeds));*/
-
         swipeRefreshList = (SwipeRefreshLayout) findViewById(R.id.swipeToRefresh);
 
         mFactFeedAdapter = new FactFeedAdapter(null);
@@ -64,6 +61,7 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
     }
 
     private void getFeeds() {
+        Log.d(TAG,"getfeeds");
         if (checkInternet()) {
             mPresenter.getFactFeeds();
             setRefreshingState(true);
@@ -71,8 +69,16 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
             setRefreshingState(false);
         }
     }
+
+
+    /**
+     * Show fact feeds.
+     *
+     * @param fact - to display.
+     */
     @Override
     public void showFeeds(FactFeed fact) {
+        Log.d(TAG,"showFeeds");
         getSupportActionBar().setTitle(fact.getTitle());
         if (CollectionUtil.isEmpty(fact.getRows())) {
             showNoFeedsAvailableError();
@@ -83,6 +89,11 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
         }
     }
 
+    /**
+     * Show error of fact feed.
+     *
+     * @param error - to display.
+     */
     @Override
     public void showError(String error) {
         getSupportActionBar().setTitle(getString(R.string.error));
@@ -117,6 +128,7 @@ public class MainActivity extends BaseAppActivity<FactFeedsPresenterImpl> implem
      * @param setRefreshing - true if page is refreshing
      */
     public void setRefreshingState(boolean setRefreshing) {
+        Log.d(TAG,"setRefreshingState");
         if (null ==  swipeRefreshList) {
             return;
         }

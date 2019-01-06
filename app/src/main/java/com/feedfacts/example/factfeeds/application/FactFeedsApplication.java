@@ -19,7 +19,7 @@ public class FactFeedsApplication extends Application {
 
   }
 
-    /*int image caching of facts*/
+    /*initialise image caching of facts*/
    private void initImageCaching(){
       Picasso.Builder builder = new Picasso.Builder(this);
     builder.downloader(new com.jakewharton.picasso.OkHttp3Downloader(this, Integer.MAX_VALUE));

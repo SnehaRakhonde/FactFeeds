@@ -28,7 +28,7 @@ public class ExecutorCallback<T> implements Callback<T> {
   @Override
   public void onResponse(Call<T> call, Response<T> response) {
 
-    if (null != onServerCallResponse) {
+    if (onServerCallResponse != null) {
       if (response.isSuccessful() && response.code() == HttpURLConnection.HTTP_OK) {
         onServerCallResponse.onSuccess(response.body());
       } else {
@@ -39,7 +39,7 @@ public class ExecutorCallback<T> implements Callback<T> {
 
   @Override
   public void onFailure(Call<T> call, Throwable t) {
-    if (null != onServerCallResponse) {
+    if (onServerCallResponse != null) {
       onServerCallResponse.onFailure(t);
     }
   }

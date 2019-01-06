@@ -44,7 +44,7 @@ public class UiDataFetchUnitTest {
          mainActivity = rule.getActivity();
         assertNotNull("MainActivity is null", mainActivity);
     }
-
+/*to test if data download is successful or not*/
 @Test
 public void testDataDownloadSuccess() throws InterruptedException {
     MainActivity activity = rule.getActivity();
@@ -62,6 +62,8 @@ public void testDataDownloadSuccess() throws InterruptedException {
     }
 
 }
+
+/* Tests if downloaded data doesn't have any feed values.*/
 @Test
 public void testDataFetechFailed(){
     try {
