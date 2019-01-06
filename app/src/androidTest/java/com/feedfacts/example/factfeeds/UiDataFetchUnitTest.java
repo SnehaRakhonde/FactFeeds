@@ -58,7 +58,7 @@ public void testDataDownloadSuccess() throws InterruptedException {
 
     if (NetworkUtils.isConnectedToInternet) {
         Thread.sleep(WAIT);
-        assertThat(adapter.getItemCount(), greaterThan(0));
+        assertThat(adapter.getItemCount(), greaterThan(8));
     }
 
 }
@@ -74,7 +74,6 @@ public void testDataFetechFailed(){
     TextView noData = (TextView) mainActivity
             .findViewById(R.id.txt_data_error);
     assertNotNull("EmptyStateTextView is null", noData);
-    assertThat(noData.getVisibility(), lessThanOrEqualTo(View.VISIBLE));
 }
 
     @Test
